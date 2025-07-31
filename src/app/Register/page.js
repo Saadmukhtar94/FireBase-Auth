@@ -1,22 +1,22 @@
 'use client'
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { register } from '@/lib/firebase/auth';
+import { registerUser } from '@/lib/firebase/auth';
 export default function page() {
     const [email,setEmail] = useState('');
     const[password,setPassword] = useState('');
-    const handleSubmit = (e) => {
+    const handleSubmit =  async (e) => {
         e.preventDefault();
         try {
-            await register(email,password);
+            await registerUser(email,password);
             alert('Registered Successfully');
             }
             catch (error){
-                alert('error.message');
+                alert(error.message);
             }
     }
   return (
-    <form onClick={handleSubmit} className=' container d-flex justify-content-center align-items-center gap-3 flex-column border bg-warning bg-opacity-10 py-3 mt-4 w-auto'>
+    <form onSubmit={handleSubmit} className=' container d-flex justify-content-center align-items-center gap-3 flex-column border bg-warning bg-opacity-10 py-3 mt-4 w-auto'>
         <h1>Register</h1>
 
         <label htmlFor="email" >Email</label>
