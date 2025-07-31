@@ -23,14 +23,6 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyBYXrvmdp17zzUnWpyzXTmc5SPklvE764g",
-  authDomain: "fir-auth-cf734.firebaseapp.com",
-  projectId: "fir-auth-cf734",
-  storageBucket: "fir-auth-cf734.firebasestorage.app",
-  messagingSenderId: "857406555857",
-  appId: "1:857406555857:web:62e68fcd4421642399a7f0"
-};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
