@@ -1,29 +1,18 @@
-// // src/lib/firebase/config.js
-// import { initializeApp } from 'firebase/app';
+// src/lib/firebase/config.js
+import { initializeApp } from 'firebase/app';
 
-// const firebaseConfig = {
-//   apiKey: "YOUR-API-KEY",
-//   authDomain: "your-app.firebaseapp.com",
-//   projectId: "your-app",
-//   storageBucket: "your-app.appspot.com",
-//   messagingSenderId: "YOUR-SENDER-ID",
-//   appId: "YOUR-APP-ID"
-// };
+// Firebase configuration from .env.local
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+};
 
-// // ✅ Initialize and export app
-// const app = initializeApp(firebaseConfig);
-// export { app };
-
-
-
-
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-
-// Initialize Firebase
+// Initialize Firebase app
 const app = initializeApp(firebaseConfig);
-export {app};
+
+// Export app to use in auth.js, firestore.js, etc.
+export { app };
