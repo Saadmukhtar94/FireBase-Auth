@@ -11,7 +11,7 @@ export default function page() {
     e.preventDefault();
     try{
       await loginUser(email,password);{
- alert( ' ✅  Login Successful'); 
+//  alert( ' ✅  Login Successful'); 
    router.push('/dashboard')
       }
     }

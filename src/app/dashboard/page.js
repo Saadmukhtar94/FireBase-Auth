@@ -1,11 +1,24 @@
 'use client'
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import Image from 'next/image'
-import { logoutUser } from '@/lib/firebase/auth'
+
+import { auth,logoutUser } from '@/lib/firebase/auth'
 import { useRouter } from 'next/navigation';
+import { onAuthStateChanged } from 'firebase/auth';
 
 export default function page() {
+  useEffect (() => {
+    const unsubscribe = onAuthStateChanged(auth,(user) => {
+      if (user) {
+        setEmail(user.email);        
+      }
+      else{
+        router.push('/Login');
+      }
+    })
+  })
   const  router = useRouter ()
+  const [userEmail,setEmail] = useState ('')
   const handleLogout = async  () =>  {
     try {
       await logoutUser ()
@@ -29,7 +42,7 @@ export default function page() {
        <div className='bg-light h-75 d-flex flex-column justify-content-center align-items-center px-4 my-auto mb-5'>
         <h2 className='pb-5'>Welcome to Dashboard</h2>
         <p className='w-75'>This Project provides a Firebase-based authentication system integerated intp a Next.js application</p>
-        <p><span>Email:</span> </p>
+        <p><strong>Email:</strong> {userEmail || "Loading...."}</p>
         <button className='btn btn-danger' onClick={handleLogout}>Logout</button>
        </div>
     </div>
