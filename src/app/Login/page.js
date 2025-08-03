@@ -2,7 +2,9 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import {loginUser} from '@/lib/firebase/auth'
+import {useRouter} from 'next/navigation'
 export default function page() {
+  const router = useRouter ()
   const [email,setEmail] = useState('');
   const [ password,setPassword] = useState('');
   const handleSubmit = async (e) => {
@@ -10,6 +12,7 @@ export default function page() {
     try{
       await loginUser(email,password);{
  alert( ' ✅  Login Successful'); 
+   router.push('/dashboard')
       }
     }
     catch(error){
