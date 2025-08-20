@@ -26,7 +26,7 @@ const handleSubmit = async (e) =>{
         <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder='Enter Your Email' className='w-25 form-control' required/>
          
         <div className='d-flex justify-content-around gap-2'> 
-            <p className='fs-6'>don't have an account?</p>
+            <p className='fs-6'>don&apos;t have an account?</p>
         <Link href="/Register" className='text-warning'>Register</Link>   
              </div>
         
