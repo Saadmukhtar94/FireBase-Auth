@@ -2,14 +2,18 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { registerUser } from '@/lib/firebase/auth';
-export default function page() {
+import {useRouter} from 'next/navigation'
+
+export default function Page() {
+    const router = useRouter ()  
     const [email,setEmail] = useState('');
     const[password,setPassword] = useState('');
     const handleSubmit =  async (e) => {
         e.preventDefault();
         try {
             await registerUser(email,password);
-            alert('Registered Successfully');
+                    router.push('/dashboard');
+
             }
             catch (error){
                 alert(error.message);

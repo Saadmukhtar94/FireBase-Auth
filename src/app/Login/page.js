@@ -3,16 +3,18 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import {loginUser} from '@/lib/firebase/auth'
 import {useRouter} from 'next/navigation'
-export default function page() {
+export default function Page() {
   const router = useRouter ()
   const [email,setEmail] = useState('');
   const [ password,setPassword] = useState('');
+  const [isLoading,setIsLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+      setIsLoading(true); 
+
     try{
       await loginUser(email,password);{
-//  alert( ' ✅  Login Successful'); 
-   router.push('/dashboard')
+      router.push('/dashboard')
       }
     }
     catch(error){
@@ -33,8 +35,19 @@ export default function page() {
         <input type="password" placeholder='Enter Your Password' onChange={(e) => setPassword(e.target.value)} className='w-25 form-control' required/>
         <Link href="/Forgot_password" className='text-warning'>Forgot Password</Link>        
         
-        <button type="submit" className='btn btn-primary' > Submit</button>
-
+        <button type="submit" className='btn btn-primary' disabled={isLoading} >
+          {isLoading ? (
+                    <>
+                      <span
+                        className="spinner-border spinner-border-sm me-2"
+                        role="status"
+                        aria-hidden="true"></span>
+                      Logging in...
+                    </>
+                  ) : (
+                    "Log In"
+                  )}
+           </button>
 
     </form>
   )

@@ -6,7 +6,7 @@ import {resetPassword } from '@/lib/firebase/auth'
 
 
 
-export default function page() {
+export default function Page() {
   const [email,setEmail] = useState('');
 const handleSubmit = async (e) =>{
   e.preventDefault();
@@ -24,8 +24,7 @@ const handleSubmit = async (e) =>{
 
         <label htmlFor="email" >Enter Email</label>
         <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder='Enter Your Email' className='w-25 form-control' required/>
-          {/* <label htmlFor="password" >Password</label>
-        <input type="password" placeholder='Enter Your Password' className='w-25 form-control' required/> */}
+         
         <div className='d-flex justify-content-around gap-2'> 
             <p className='fs-6'>don't have an account?</p>
         <Link href="/Register" className='text-warning'>Register</Link>   

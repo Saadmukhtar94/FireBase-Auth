@@ -6,7 +6,7 @@ import { auth,logoutUser } from '@/lib/firebase/auth'
 import { useRouter } from 'next/navigation';
 import { onAuthStateChanged } from 'firebase/auth';
 
-export default function page() {
+export default function Page() {
   useEffect (() => {
     const unsubscribe = onAuthStateChanged(auth,(user) => {
       if (user) {
@@ -18,8 +18,11 @@ export default function page() {
     })
   })
   const  router = useRouter ()
-  const [userEmail,setEmail] = useState ('')
+  const [userEmail,setEmail] = useState ('');
+  const [isLoading,setIsLoading]= useState(false);
   const handleLogout = async  () =>  {
+          setIsLoading(true); 
+
     try {
       await logoutUser ()
       router.push('/Login')
@@ -43,7 +46,20 @@ export default function page() {
         <h2 className='pb-5'>Welcome to Dashboard</h2>
         <p className='w-75'>This Project provides a Firebase-based authentication system integerated intp a Next.js application</p>
         <p><strong>Email:</strong> {userEmail || "Loading...."}</p>
-        <button className='btn btn-danger' onClick={handleLogout}>Logout</button>
+        <button className='btn btn-danger' onClick={handleLogout}>
+          {isLoading ? (
+                    <>
+                      <span
+                        className="spinner-border spinner-border-sm me-2"
+                        role="status"
+                        aria-hidden="true"></span>
+                      Logging out...
+                    </>
+                  ) : (
+                    "Log out"
+                  )}
+           </button>
+          
        </div>
     </div>
   )
